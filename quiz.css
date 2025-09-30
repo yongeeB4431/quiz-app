@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin: 1rem;
+  text-align: center;
+}
+
+.question {
+  display: flex;
+  /* align-items: center; */
+}
+
+.quiz-card {
+  /* background-color: red; */
+  background-color: azure;
+  margin: 0 2rem;
+  width: 600px;
+  max-width: 85%;
+}
+
+.options {
+  margin: 10px 0;
+  padding: 0 20px;
+}
+
+.options section {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+.options section label {
+  letter-spacing: 2px;
+  margin-left: 5px;
+  /* font-weight: bold; */
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.options input {
+  /* margin-left */
+}
+
+.question {
+  font-size: 20px;
+  font-family: "Courier New", Courier, monospace;
+  padding: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 1rem;
+}
+
+.buttons button {
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+}
+
+.next {
+  margin-left: auto;
+  background-color: rgb(21, 190, 21);
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.prev {
+  background-color: rgb(238, 74, 74);
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.none {
+  display: none;
+}
+
+.submit {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+  /* background-color: blue; */
+  margin: 10px 1rem;
+  display: none;
+}
+
+.submit button {
+  padding: 10px 15px;
+  margin: 0px 2rem;
+  background-color: blue;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 8px;
+}

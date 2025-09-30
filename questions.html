@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="questions_container"></div>
+
+    <script>
+      const questionsContainer = document.querySelector(".questions_container");
+      let questions = localStorage.getItem("scores");
+      questions = JSON.parse(questions);
+
+      for (index in questions) {
+        const question = questions[index];
+        console.log(question);
+      }
+
+      //   console.log(questions[0]);
+    </script>
+  </body>
+</html>
