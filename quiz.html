@@ -7,22 +7,33 @@
     <link rel="stylesheet" href="quiz.css" />
   </head>
   <body>
-    <header>
+    <header class="quiz-header">
       <h1>Quiz &amp; Worksheet - Understanding Nigeria's Politics</h1>
     </header>
-    <div class="quiz-cards">
-      <!-- <input type="text" > -->
-      <!-- <div class="question"></div> -->
-      <!-- <div class="options"></div>
-      <div class="buttons">
-        <button class="prev">Prev</button>
-        <button class="next">Next</button>
-      </div> -->
+    <div class="submission-card">
+      <header>
+        <h1>Submit Quiz?</h1>
+      </header>
+      <p>
+        You're about to submit your answers for Understanding Nigeria's
+        Politics.
+      </p>
+      <code
+        >You answered <span class="answered-questions"></span> questions</code
+      >
+      <p class="proceed">Are you sure you want to proceed?</p>
+      <div class="confirm">
+        <a href="analysis.html">
+          <h3>Yes, I'm confident--submit now</h3>
+        </a>
+      </div>
+      <div class="revise">
+        <h3>No, I want to review my answers again</h3>
+      </div>
     </div>
-    <div class="submit">
-      <a href="scores.html">
-        <button onclick="markQuiz()">Submit</button>
-      </a>
+    <div class="quiz-container"></div>
+    <div class="submit-quiz">
+      <h4>Submit</h4>
     </div>
 
     <script src="quiz.js" type="module"></script>

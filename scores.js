@@ -1,9 +1,10 @@
 let _scores = 0;
-let questions = localStorage.getItem("quiz");
+let questions = localStorage.getItem("quiz-result");
 questions = JSON.parse(questions);
+console.log(questions);
 
 questions.forEach((question) => {
-  if (question.markAs == "passed") _scores++;
+  if (question.correctOption) _scores++;
 });
 
 function displayScores() {

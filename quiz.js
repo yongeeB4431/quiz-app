@@ -1,111 +1,149 @@
 import quizQuestions from "./quizApi.js";
 
-let quizIndex = 0;
-console.log(quizQuestions);
-
-for (let index in quizQuestions) {
-  const question = quizQuestions[index];
-  const options = question.options;
-  question.correctOption = options.indexOf(question.answer);
-  question.selectedOption = -1;
-  question.markAs = "failed";
+for (const index in quizQuestions) {
+  quizQuestions[index].chosenOptionIndex = -1;
+  quizQuestions[index].correctOption = false;
 }
 
-displayQuestion(0);
+console.log(quizQuestions[0]);
+var quizIndex = 0;
 
-function displayQuestion(index) {
-  const question = quizQuestions[index];
-  // create quiz card
-  createQuizCard(question, index);
-  displaySubmitButton(index);
+function displayQuizCard(index) {
+  createQuizCard(index);
+  displaySubmitBtn();
 }
 
-function createQuizCard(question, index) {
-  const card = document.createElement("section");
-  card.className = "quiz-card";
+function createOptions(values, index) {
+  let optionsHtml = ``;
 
-  addQuiz(card, question, index);
+  values.forEach((option) => {
+    optionsHtml += `
+      <section class="option">
+        <input type="radio" name="question-${
+          index + 1
+        }" value="${option}" id="${option}"/>
+        <label for="${option}">${option}</label>
+      </section> 
+    `;
+  });
+
+  return optionsHtml;
 }
 
-function previousQuiz() {
-  quizIndex--;
-  deleteQuizCard();
-  displayQuestion(quizIndex);
-}
+function createQuizCard(index) {
+  const quizContainer = document.querySelector(".quiz-container");
+  const quiz = quizQuestions[index];
+  const quizCard = document.createElement("div");
+  quizCard.className = "quiz-card";
+  const options = createOptions(quiz.options, index);
 
-function nextQuiz() {
-  quizIndex++;
-  deleteQuizCard();
-  displayQuestion(quizIndex);
-}
-
-function addQuiz(card, item, index) {
-  const { question, options } = item;
-  let optionsContent = displayOptions(options);
-
-  card.innerHTML = `
-   <p class="question"> <span>${index + 1}.</span> ${question}</p>
-    <section class="options">
-    ${optionsContent}
-    </section>
-    <div class="buttons">
-    <button class="${
-      index == 0 ? "none" : "prev"
-    }" onclick="previousQuiz()">prev</button>
-    <button class="${
-      index == quizQuestions.length - 1 ? "none" : "next"
-    }" onclick="nextQuiz()">next</button>
+  quizCard.innerHTML = `
+    <h3>Question ${index + 1}</h3>
+    <h3 class="question">${quiz.question}</h3>
+    <div class="options">
+    ${options}
     </div>
+    <div class="buttons">
+    <button class="prev ${
+      index == 0 ? "hide-prev-btn" : "show-prev-btn"
+    }">prev</button>
+    <button class="next ${
+      index == quizQuestions.length - 1 ? "hide-next-btn" : "show-next-btn"
+    }">next</button>
+    </div>
+    
   `;
 
-  const quizCards = document.querySelector(".quiz-cards");
-  quizCards.appendChild(card);
+  const [prevBtn, nextBtn] = quizCard.querySelectorAll("button");
+  prevBtn.addEventListener("click", prevQuizCard);
+  nextBtn.addEventListener("click", nextQuizCard);
 
-  const values = document.querySelectorAll(".quiz-card input");
+  quizContainer.appendChild(quizCard);
 
-  const [prevBtn, nextBtn] = document.querySelectorAll(".quiz-card button");
-  prevBtn.addEventListener("click", previousQuiz);
-  nextBtn.addEventListener("click", nextQuiz);
+  const optionIndex = quiz.chosenOptionIndex;
+  if (optionIndex != -1) {
+    const _options = document.querySelectorAll("input");
+    _options[optionIndex].checked = true;
+  }
 
-  selectOptions(values, item, index);
+  const allOptions = quizCard.querySelectorAll("input");
+  allOptions.forEach((option) =>
+    option.addEventListener("change", (e) => selectOption(e, quiz, index))
+  );
 }
 
-function selectOptions(values, item, index) {
-  values.forEach((option) => {
-    option.addEventListener("change", (e) => {
-      const ref = e.target;
-      const selectedIndex = item.options.indexOf(ref.id);
-      quizQuestions[index].selectedIndex = selectedIndex;
-      quizQuestions[index].markAs = ref.id == item.answer ? "passed" : "failed";
-    });
+function selectOption(e, quiz, index) {
+  const optionSelected = e.target.value;
+  const answer = quiz.answer;
+  const isCorrectAnswer = optionSelected == answer;
+  quizQuestions[index].chosenOptionIndex = quiz.options.indexOf(optionSelected);
+  quizQuestions[index].correctOption = isCorrectAnswer;
+}
+
+function deleteQuizCard() {
+  const quizCard = document.querySelector(".quiz-card");
+  quizCard.remove();
+}
+
+function prevQuizCard() {
+  quizIndex--;
+  deleteQuizCard();
+  displayQuizCard(quizIndex);
+}
+
+function nextQuizCard() {
+  quizIndex++;
+  deleteQuizCard();
+  displayQuizCard(quizIndex);
+}
+
+function displaySubmitBtn() {
+  const submitQuiz = document.querySelector(".submit-quiz");
+  if (quizIndex == quizQuestions.length - 1) {
+    submitQuiz.style.display = "block";
+    submitQuiz.addEventListener("click", displaySubmissionCard);
+    console.log("sub,itt");
+  } else submitQuiz.style.display = "none";
+}
+
+function displaySubmissionCard() {
+  const submissionCard = document.querySelector(".submission-card");
+  submissionCard.style.display = "flex";
+
+  let optionChosenCount = 0;
+  quizQuestions.forEach((quiz) => {
+    if (quiz.chosenOptionIndex != -1) optionChosenCount++;
   });
+
+  const answeredQuestions = document.querySelector(".answered-questions");
+  answeredQuestions.innerText = `${optionChosenCount}/${quizQuestions.length}`;
+
+  const quizCard = document.querySelector(".quiz-card");
+  const quizHeader = document.querySelector(".quiz-header");
+
+  quizCard.classList.add("blur");
+  quizHeader.classList.add("blur");
+
+  const [submit, revise] = submissionCard.querySelectorAll("div");
+  revise.addEventListener("click", () =>
+    reviewQuestions(submissionCard, quizHeader)
+  );
+  submit.addEventListener("click", submitQuizQuestions);
 }
 
-function displayOptions(values) {
-  let optionsHTML = "";
+function reviewQuestions(submissionCard, quizHeader) {
+  submissionCard.style.display = "none";
+  deleteQuizCard();
 
-  const renderOption = (value) => {
-    optionsHTML += `
-      <section class="option">
-      <input name="option" type="radio" id="${value}" />
-      <label for="${value}">${value}</label>
-      </section>
-    `;
-  };
-  values.forEach((value) => renderOption(value));
-
-  return optionsHTML;
+  quizIndex = 0;
+  displayQuizCard(quizIndex);
+  quizHeader.classList.remove("blur");
 }
 
-const deleteQuizCard = () => document.querySelector(".quiz-card").remove();
-
-function displaySubmitButton(index) {
-  const submit = document.querySelector(".submit");
-
-  if (index == quizQuestions.length - 1) submit.style.display = "flex";
-  else submit.style.display = "none";
+function submitQuizQuestions() {
+  const savedQuiz = JSON.stringify(quizQuestions);
+  localStorage.setItem("quiz-result", savedQuiz);
 }
 
-function markQuiz() {
-  localStorage.setItem("quiz", JSON.stringify(quizQuestions));
-}
+quizIndex = 0;
+displayQuizCard(quizIndex);

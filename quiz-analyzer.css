@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  margin: 1rem;
+  text-align: center;
+}
+
+.quiz-analyzer-container {
+  background-color: azure;
+  margin: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.quiz-card {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.quiz-card h4 {
+  font-style: italic;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.quiz-card .question {
+  font-family: cursive;
+  margin-bottom: 5px;
+}
+
+.quiz-card .option {
+  margin-bottom: 10px;
+  font-weight: lighter;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.passed {
+  background-color: rgb(158, 244, 158);
+  border-radius: 10px;
+}
+
+.unanswered {
+  background-color: lightblue;
+  border-radius: 10px;
+}
+
+.incorrect {
+  background-color: rgb(238, 124, 124);
+  border-radius: 10px;
+}
+
+.check-scores {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.check-scores button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-weight: bolder;
+}
+
+.scores {
+  background-color: rgb(43, 179, 43);
+}
+
+.home {
+  background-color: lightblue;
+}

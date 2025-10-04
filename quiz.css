@@ -19,92 +19,149 @@ header h1 {
   text-align: center;
 }
 
-.question {
-  display: flex;
-  /* align-items: center; */
+.hide-prev-btn,
+.hide-next-btn {
+  display: none;
 }
 
 .quiz-card {
-  /* background-color: red; */
-  background-color: azure;
-  margin: 0 2rem;
   width: 600px;
-  max-width: 85%;
+  /* height: 200px; */
+  padding: 20px;
+  background-color: azure;
+}
+
+.quiz-card h3:first-child {
+  font-family: cursive;
+  /* margin-bottom: 5px; */
+}
+
+.question {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin: 5px 0;
 }
 
 .options {
   margin: 10px 0;
-  padding: 0 20px;
 }
 
-.options section {
-  margin: 15px 0;
+.option {
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
 }
 
-.options section label {
-  letter-spacing: 2px;
-  margin-left: 5px;
-  /* font-weight: bold; */
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+.option label {
+  font-style: italic;
+  font-weight: bold;
 }
 
-.options input {
-  /* margin-left */
-}
-
-.question {
-  font-size: 20px;
-  font-family: "Courier New", Courier, monospace;
-  padding: 20px;
+.option input {
+  margin-right: 5px;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin: 10px 1rem;
 }
 
 .buttons button {
   padding: 10px 15px;
   border: none;
-  outline: none;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-.next {
+.buttons .prev {
+  background-color: rgb(231, 66, 66);
+}
+
+.buttons .next {
+  background-color: rgb(72, 72, 242);
   margin-left: auto;
-  background-color: rgb(21, 190, 21);
-  border-radius: 5px;
-  font-weight: bold;
 }
 
-.prev {
-  background-color: rgb(238, 74, 74);
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-.none {
-  display: none;
-}
-
-.submit {
-  display: flex;
-  justify-content: right;
-  width: 100%;
-  /* background-color: blue; */
-  margin: 10px 1rem;
-  display: none;
-}
-
-.submit button {
+.submit-quiz {
+  margin-left: auto;
+  margin-right: 20px;
+  margin-top: 10px;
+  background-color: green;
   padding: 10px 15px;
-  margin: 0px 2rem;
-  background-color: blue;
-  border: none;
-  outline: none;
-  color: white;
   border-radius: 8px;
+  display: none;
+  cursor: pointer;
+}
+
+.submission-card {
+  content: "";
+  position: absolute;
+  width: 800px;
+  max-width: 90%;
+  background-color: azure;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  display: none;
+  border-radius: 10px;
+}
+
+.submission-card h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.submission-card p {
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.submission-card code {
+  font-size: 18px;
+  margin: 5px;
+}
+
+.submission-card .proceed {
+  margin: 5px;
+  font-size: 18px;
+}
+
+.submission-card div {
+  width: 70%;
+  height: 40px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submission-card div:hover {
+  transform: scale(1.05);
+}
+
+.submission-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.revise {
+  background-color: rgba(240, 32, 32, 0.973);
+  transition: transform 0.5s linear;
+}
+
+.confirm {
+  background-color: green;
+  transition: transform 0.5s linear;
+}
+
+.blur {
+  filter: blur(10px);
+}
+
+.checked {
+  background-color: red;
 }

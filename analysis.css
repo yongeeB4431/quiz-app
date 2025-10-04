@@ -1,0 +1,54 @@
+.analyzer-container {
+  background-color: white;
+}
+
+header h1 {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.quiz-analysis {
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.question-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 20px;
+  background-color: azure;
+}
+
+.question {
+  text-align: center;
+  width: 65px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.scores {
+  background-color: rgb(17, 173, 69);
+  border-radius: 8px;
+}
+
+.all-questions {
+  background-color: rgb(65, 65, 231);
+  font-weight: bold;
+}
